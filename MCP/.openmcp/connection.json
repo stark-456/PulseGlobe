@@ -1,0 +1,35 @@
+{
+  "items": [
+    [
+      {
+        "connectionType": "STDIO",
+        "command": "uv",
+        "args": [
+          "run",
+          "python",
+          "-m",
+          "src.server"
+        ],
+        "url": "",
+        "cwd": "D:/develop/PulseGlobe/MCP",
+        "oauth": "",
+        "clientName": "openmcp.connect.STDIO",
+        "clientVersion": "0.0.1",
+        "env": {
+          "HOME": "C:\\Users\\zkh",
+          "LOGNAME": "zkh",
+          "PATH": "D:\\VMware\\bin\\;C:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;D:\\develop\\jdk\\bin;C:\\Program Files\\MySQL\\MySQL Server 8.0\\bin;D:\\Node\\;C:\\Program Files\\Redis\\;D:\\hadoop\\hadoop-3.3.6\\bin;D:\\hadoop\\hadoop-3.3.6\\sbin;D:\\hadoop\\hadoop-3.3.6\\bin\\winutils.exe;C:\\Program Files\\Git\\cmd;D:\\Windows Kits\\10\\Windows Performance Toolkit\\;C:\\Users\\zkh\\AppData\\Roaming\\Python\\Python311\\site-packages\\pyqt5_tools;D:\\anaconda;D:\\cursor\\resources\\app\\bin;D:\\anaconda\\Scripts;D:\\anaconda\\Library\\bin;C:\\Users\\zkh\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\zkh\\AppData\\Roaming\\npm;C:\\Program Files\\cpolar\\",
+          "SHELL": "C:\\Windows\\system32\\cmd.exe",
+          "TERM": "未设置 (Windows 默认终端)",
+          "USER": "zkh"
+        },
+        "serverInfo": {
+          "name": "pulseglobe-social-search",
+          "version": "1.23.3"
+        },
+        "name": "pulseglobe-social-search",
+        "version": "1.23.3"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "clientId": "a9a08ea6-8ea6-508ea65971d-808ea65971d88e1-d88e1e42",
+  "currentIndex": 0,
+  "tabs": [
+    {
+      "name": "工具",
+      "icon": "icon-tool",
+      "type": "blank",
+      "componentIndex": 2,
+      "storage": {
+        "activeNames": [
+          0
+        ],
+        "autoDetectDiagram": {
+          "edges": [
+            {
+              "id": "etwitter_search_posts_twitter_get_post_comments_1765532209435",
+              "sources": [
+                "twitter_search_posts"
+              ],
+              "targets": [
+                "twitter_get_post_comments"
+              ]
+            }
+          ],
+          "views": []
+        },
+        "formData": {
+          "keywords": "tron",
+          "post_count": 3,
+          "comments_per_post": 5,
+          "search_type": "Top"
+        },
+        "currentToolName": "twitter_sentiment_search",
+        "lastToolCallResponse": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"summary\": {\n    \"keyword\": \"tron\",\n    \"total_posts\": 3,\n    \"total_comments\": 11,\n    \"search_time\": \"2025-12-12T18:05:16.266471\",\n    \"search_type\": \"Top\"\n  },\n  \"posts\": [\n    {\n      \"id\": \"\",\n      \"text\": \"Tron: Ares (2025) https://t.co/MM8xagEIDf\",\n      \"author\": {\n        \"name\": \"\",\n        \"username\": \"\",\n        \"verified\": false,\n        \"followers\": 0\n      },\n      \"time\": \"Wed Dec 03 16:44:34 +0000 2025\",\n      \"engagement\": {\n        \"likes\": 0,\n        \"retweets\": 0,\n        \"replies\": 0,\n        \"views\": \"0\"\n      },\n      \"url\": \"https://twitter.com/i/status/\",\n      \"comments\": [\n        {\n          \"id\": \"1996321110695059796\",\n          \"text\": \"Julian Dillinger looks like MCP\",\n          \"author\": {\n            \"name\": \"Matias Sanchez\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 20:50:17 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1996305677833425076\",\n          \"text\": \"Made waves (in me)\",\n          \"author\": {\n            \"name\": \"∞ - 1\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 19:48:57 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        }\n      ],\n      \"comment_count\": 2\n    },\n    {\n      \"id\": \"\",\n      \"text\": \"The opening credits of Tron: Ares...my highlight of the entire movie in HD. #TronAres https://t.co/rcLqEY3BTR\",\n      \"author\": {\n        \"name\": \"\",\n        \"username\": \"\",\n        \"verified\": false,\n        \"followers\": 0\n      },\n      \"time\": \"Mon Dec 01 17:25:40 +0000 2025\",\n      \"engagement\": {\n        \"likes\": 0,\n        \"retweets\": 0,\n        \"replies\": 0,\n        \"views\": \"0\"\n      },\n      \"url\": \"https://twitter.com/i/status/\",\n      \"comments\": [\n        {\n          \"id\": \"1996013289495478585\",\n          \"text\": \"One of the greatest movie openings ever! I miss seeing it on the best screen and in IMAX audio. Saw it six times at the cinema and my seventh visit was cancelled (the last ever cinema screening in London) due to a faulty projector.\",\n          \"author\": {\n            \"name\": \"Jai'me Jan\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 00:27:07 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1996114582348136848\",\n          \"text\": \"I’m sad people hated the movie back in October just cause of Leto. Like this movie was genuinely so good. I hope when people see it at home they’ll see how wrong they were about trashing it\",\n          \"author\": {\n            \"name\": \"Mø\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 07:09:37 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1996042964460839340\",\n          \"text\": \"I don't know if it was deliberate or not, but see the creation of Ares starting with his eye, and the eye is often called the window into the soul.\",\n          \"author\": {\n            \"name\": \"Arogen\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 02:25:02 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1996066959751086393\",\n          \"text\": \"Sick\",\n          \"author\": {\n            \"name\": \"timildeeps\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Wed Dec 03 04:00:22 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1996543539040448833\",\n          \"text\": \"This loops nicely.\",\n          \"author\": {\n            \"name\": \"Fenix Minerva\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Thu Dec 04 11:34:08 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        }\n      ],\n      \"comment_count\": 5\n    },\n    {\n      \"id\": \"\",\n      \"text\": \"THE LEGACY https://t.co/r3nKVaScBk\",\n      \"author\": {\n        \"name\": \"\",\n        \"username\": \"\",\n        \"verified\": false,\n        \"followers\": 0\n      },\n      \"time\": \"Sat Dec 06 13:46:26 +0000 2025\",\n      \"engagement\": {\n        \"likes\": 0,\n        \"retweets\": 0,\n        \"replies\": 0,\n        \"views\": \"0\"\n      },\n      \"url\": \"https://twitter.com/i/status/\",\n      \"comments\": [\n        {\n          \"id\": \"1997384404784894210\",\n          \"text\": \"A shame they didn’t interact in the new movie. Would have been perfect.\",\n          \"author\": {\n            \"name\": \"Atlas Lionboy\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Sat Dec 06 19:15:26 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1997419059449626964\",\n          \"text\": \"A good legacy and a bad legacy\",\n          \"author\": {\n            \"name\": \"R 12🐢\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Sat Dec 06 21:33:08 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1997572730716332505\",\n          \"text\": \"finally getting to see the legacy of dillinger makes me so happy like YESSSSSS\",\n          \"author\": {\n            \"name\": \"✨️The Gary 🌌\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Sun Dec 07 07:43:46 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        },\n        {\n          \"id\": \"1997739305498976762\",\n          \"text\": \"Please GOD let Aries get a sequel\",\n          \"author\": {\n            \"name\": \"CaptSlayer 👧 🍵\",\n            \"username\": \"\",\n            \"verified\": false,\n            \"followers\": 0\n          },\n          \"time\": \"Sun Dec 07 18:45:41 +0000 2025\",\n          \"engagement\": {\n            \"likes\": 0,\n            \"replies\": 0\n          }\n        }\n      ],\n      \"comment_count\": 4\n    }\n  ]\n}"
+            }
+          ],
+          "isError": false
+        }
+      }
+    }
+  ]
+}
