@@ -167,15 +167,15 @@
 
 ### instagram_search_posts
 
-搜索 Instagram 帖子。
+搜索 Instagram 话题标签帖子。
 
 **参数：**
 
 | 参数名 | 类型 | 必需 | 默认值 | 说明 |
 |--------|------|------|--------|------|
-| keywords | string | ✅ | - | 搜索关键词（话题标签或用户名） |
+| keywords | string | ✅ | - | 话题标签关键词(不需要#) |
 | count | integer | ❌ | 20 | 返回结果数量 |
-| search_type | string | ❌ | "hashtag" | 搜索类型："hashtag" 或 "user" |
+| feed_type | string | ❌ | "top" | 排序类型："top"(热门) 或 "recent"(最新) |
 
 **返回示例：**
 
@@ -183,25 +183,30 @@
 {
   "posts": [
     {
-      "id": "1234567890_123",
-      "shortcode": "ABC123xyz",
-      "caption": "帖子内容...",
+      "id": "3776488928670070326",
+      "code": "DRoyKwDkzY2",
+      "text": "帖子内容...",
+      "hashtags": ["#mongolia", "#travel"],
       "author": {
-        "id": "123456",
-        "username": "example_user"
+        "id": "76594868949",
+        "username": "example_user",
+        "name": "用户名称",
+        "verified": false
       },
-      "created_at": 1640995200,
+      "created_at": "2025-11-29T10:36:55Z",
+      "media_type": "reel",
+      "is_video": true,
       "metrics": {
-        "likes": 500,
-        "comments": 50,
-        "views": 1000
+        "likes": 2089,
+        "comments": 1,
+        "views": 36233
       },
-      "media_type": "PHOTO",
-      "url": "https://www.instagram.com/p/ABC123xyz"
+      "url": "https://www.instagram.com/p/DRoyKwDkzY2"
     }
   ],
   "total": 1,
-  "keywords": "ai",
+  "keywords": "mongolia",
+  "pagination_token": "...",
   "platform": "instagram"
 }
 ```
@@ -216,10 +221,81 @@
 
 | 参数名 | 类型 | 必需 | 默认值 | 说明 |
 |--------|------|------|--------|------|
-| post_id | string | ✅ | - | 帖子 ID 或短代码 |
+| post_id | string | ✅ | - | 帖子 ID 或短代码(code) |
 | max_comments | integer | ❌ | 100 | 最大评论数量 |
+| sort_by | string | ❌ | "recent" | 排序："recent"(最新) 或 "popular"(热门) |
 
 ---
+
+### instagram_sentiment_search
+
+**🆕 推荐使用** - Instagram 舆情分析综合工具。
+
+自动搜索话题帖子并获取每条帖子的评论，返回精简的、适合大模型分析的数据结构。
+
+**参数：**
+
+| 参数名 | 类型 | 必需 | 默认值 | 说明 |
+|--------|------|------|--------|------|
+| keywords | string | ✅ | - | 话题标签关键词 |
+| post_count | integer | ❌ | 10 | 返回的帖子数量 |
+| comments_per_post | integer | ❌ | 20 | 每条帖子获取的评论数量 |
+| feed_type | string | ❌ | "top" | 排序类型："top"(热门) 或 "recent"(最新) |
+
+**返回示例：**
+
+```json
+{
+  "summary": {
+    "keyword": "mongolia",
+    "total_posts": 10,
+    "total_comments": 50,
+    "search_time": "2025-12-15T14:30:00+08:00",
+    "feed_type": "top"
+  },
+  "posts": [
+    {
+      "id": "3776488928670070326",
+      "code": "DRoyKwDkzY2",
+      "text": "帖子内容...",
+      "hashtags": ["#mongolia"],
+      "author": {
+        "name": "用户名称",
+        "username": "example_user",
+        "verified": false
+      },
+      "time": "2025-11-29T10:36:55Z",
+      "engagement": {
+        "likes": 2089,
+        "comments": 1,
+        "views": 36233
+      },
+      "url": "https://www.instagram.com/p/DRoyKwDkzY2",
+      "comment_count": 5,
+      "comments": [
+        {
+          "id": "18548156719051325",
+          "text": "评论内容...",
+          "author": {
+            "name": "评论者",
+            "username": "commenter",
+            "verified": false
+          },
+          "time": 1765246321,
+          "engagement": {
+            "likes": 1,
+            "replies": 0
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+
 
 ## YouTube 工具
 
@@ -233,8 +309,8 @@
 |--------|------|------|--------|------|
 | keywords | string | ✅ | - | 搜索关键词 |
 | count | integer | ❌ | 20 | 返回结果数量 |
-| order_by | string | ❌ | "relevance" | 排序方式："relevance", "date", "viewCount" |
-| language_code | string | ❌ | "zh-CN" | 语言代码（如 "en-US"） |
+| order_by | string | ❌ | "this_month" | 排序方式："relevance", "this_month", "this_week", "today" |
+| language_code | string | ❌ | "en" | 语言代码（如 "en", "zh"） |
 
 **返回示例：**
 
@@ -242,26 +318,26 @@
 {
   "videos": [
     {
-      "id": "dQw4w9WgXcQ",
+      "id": "bN1o2Yf04Eo",
       "title": "视频标题",
       "description": "视频描述...",
       "author": {
-        "id": "UCxxxxxx",
+        "id": "UCjyHCLmVi5QQiaiqYtENRuA",
         "name": "频道名称"
       },
-      "published_at": "2 years ago",
+      "published_at": "11 hours ago",
       "metrics": {
-        "views": 1000000,
-        "likes": 50000,
-        "comments": 5000
+        "views": 1409
       },
-      "duration": "3:42",
-      "thumbnail": "https://i.ytimg.com/...",
-      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      "duration": "SHORTS",
+      "type": "NORMAL",
+      "thumbnail": "https://i.ytimg.com/vi/...",
+      "url": "https://www.youtube.com/watch?v=bN1o2Yf04Eo"
     }
   ],
   "total": 1,
-  "keywords": "AI tutorial",
+  "keywords": "Mongolia",
+  "continuation_token": "...",
   "platform": "youtube"
 }
 ```
@@ -278,8 +354,75 @@
 |--------|------|------|--------|------|
 | video_id | string | ✅ | - | YouTube 视频 ID |
 | max_comments | integer | ❌ | 100 | 最大评论数量 |
+| sort_by | string | ❌ | "top" | 排序："top"(热门) 或 "new"(最新) |
 
 ---
+
+### youtube_sentiment_search
+
+**🆕 推荐使用** - YouTube 舆情分析综合工具。
+
+自动搜索视频并获取每个视频的评论，返回精简的、适合大模型分析的数据结构。
+
+**参数：**
+
+| 参数名 | 类型 | 必需 | 默认值 | 说明 |
+|--------|------|------|--------|------|
+| keywords | string | ✅ | - | 搜索关键词 |
+| video_count | integer | ❌ | 10 | 返回的视频数量 |
+| comments_per_video | integer | ❌ | 20 | 每个视频获取的评论数量 |
+| order_by | string | ❌ | "this_month" | 排序方式 |
+
+**返回示例：**
+
+```json
+{
+  "summary": {
+    "keyword": "Mongolia",
+    "total_videos": 10,
+    "total_comments": 50,
+    "search_time": "2025-12-16T15:00:00+08:00",
+    "order_by": "this_month"
+  },
+  "videos": [
+    {
+      "id": "bN1o2Yf04Eo",
+      "title": "视频标题",
+      "description": "视频描述...",
+      "author": {
+        "name": "频道名称",
+        "channel_id": "UCjyHCLmVi5QQiaiqYtENRuA"
+      },
+      "time": "11 hours ago",
+      "engagement": {
+        "views": 1409
+      },
+      "duration": "SHORTS",
+      "url": "https://www.youtube.com/watch?v=bN1o2Yf04Eo",
+      "comment_count": 5,
+      "comments": [
+        {
+          "id": "UgwPNZRmaKOte371mCh4AaABAg",
+          "text": "评论内容...",
+          "author": {
+            "name": "@username",
+            "handle": "@username",
+            "verified": false
+          },
+          "time": "5 days ago",
+          "engagement": {
+            "likes": "3"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
+
+
 
 ## TikTok 工具
 
