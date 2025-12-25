@@ -116,26 +116,48 @@ graph TD
 
 这是您设计中非常精彩的部分——通过反思循环不断完善关键词列表。
 
+> [!IMPORTANT]
+> 采用 **主Agent + 子Agent + A2A协议** 架构实现
+> 
+> **详细设计文档**：[a2a_architecture.md](file:///d:/develop/PulseGlobe/docs/a2a_architecture.md)
+
+#### A2A 多Agent架构概览
+
 ```mermaid
-graph TD
-    Start[初始关键词列表] --> Loop{迭代次数 < N?}
-    Loop -->|是| S1[Tavily搜索 → 摘要 → 反思]
-    S1 --> Update1[更新关键词列表]
-    Update1 --> S2[RAG召回 → 摘要 → 反思]
-    S2 --> Update2[更新关键词列表]
-    Update2 --> S3[MCP社交搜索 → 摘要 → 反思]
-    S3 --> Update3[更新关键词列表]
-    Update3 --> Loop
-    Loop -->|否| Output[最终关键词列表 + 三类摘要]
+graph TB
+    subgraph "主Agent (Orchestrator)"
+        O[迭代细化主Agent]
+        O -->|"A2A Task"| S1[Tavily搜索Agent]
+        O -->|"A2A Task"| S2[RAG召回Agent]
+        O -->|"A2A Task"| S3[社交媒体Agent]
+        O --> R[反思节点]
+    end
 ```
 
-**优化建议**:
+| 决策项 | 选择 |
+|--------|------|
+| 部署模式 | 进程内（单进程，内存通信） |
+| A2A SDK | 官方 `a2a-sdk` |
+| 翻译服务 | 讯蒙 Tengri API（可切换） |
 
-| 原设计 | 优化建议 | 原因 |
-|--------|----------|------|
-| 固定迭代次数 | 添加收敛判断 | 当新信息增量<阈值时提前终止 |
-| 串行执行 | 可考虑并行 | 三个数据源可并行获取 |
-| 无去重机制 | 添加语义去重 | 避免相似关键词重复 |
+#### 迭代流程
+
+```mermaid
+graph TD
+    Start[初始关键词列表] --> Loop{迭代次数 < N 且未收敛?}
+    Loop -->|是| Parallel[并行调用三个子Agent]
+    Parallel --> S1[Tavily Agent: 搜索→翻译→摘要]
+    Parallel --> S2[RAG Agent: 召回→摘要]
+    Parallel --> S3[Social Agent: MCP→翻译→摘要]
+    S1 & S2 & S3 --> Merge[合并结果]
+    Merge --> Reflect[反思节点: 更新关键词]
+    Reflect --> Converge{收敛判断}
+    Converge -->|未收敛| Loop
+    Converge -->|已收敛| Output[最终关键词列表 + 三类摘要]
+    Loop -->|否| Output
+```
+
+**收敛判断**：当新增关键词占比 < 10% 时认为收敛
 
 **反思Prompt模板示例**:
 ```
@@ -397,9 +419,11 @@ def assemble_report(template_html, chapters_content, charts_data):
 | 组件 | 选型 | 备注 |
 |------|------|------|
 | **Agent框架** | LangGraph | 状态图驱动，适合复杂流程 |
+| **A2A 协议** | `a2a-sdk` | 官方Python SDK，进程内模式 |
 | **向量数据库** | PostgreSQL + pgvector | 与现有数据库统一 |
 | **LLM** | 多平台兼容 | 见下方兼容层设计 |
 | **Embedding** | 多平台兼容 | 见下方兼容层设计 |
+| **翻译服务** | 讯蒙 Tengri | 可切换，见下方翻译服务 |
 | **搜索引擎** | Tavily API | 已有 |
 | **社交数据** | TikHub MCP | 已有 |
 
@@ -427,13 +451,13 @@ embedding:
   api_key: "${SILICONFLOW_API_KEY}"
   base_url: "https://api.siliconflow.cn/v1"
 
-translation:  # 运行时翻译配置
-  provider: "siliconflow"
-  model: "deepseek-v3"
-  # 或使用专用翻译API
-  # provider: "baidu"
-  # app_id: "${BAIDU_TRANSLATE_APPID}"
-  # secret_key: "${BAIDU_TRANSLATE_SECRET}"
+translation:  # 运行时翻译配置（可灵活切换提供商）
+  provider: "xmor"  # xmor / llm / baidu / google
+  api_key: "${XMOR_API_KEY}"
+  base_url: "https://api.xmor.cn"
+  # 备选：使用LLM翻译
+  # provider: "llm"
+  # model: "deepseek-v3"
 ```
 
 ### 支持的模型平台
@@ -447,6 +471,15 @@ translation:  # 运行时翻译配置
 | Ollama本地 | `ollama` | 本地部署的开源模型 |
 | 智谱AI | `zhipu` | GLM-4系列 |
 | 百度千帆 | `qianfan` | 文心一言 |
+
+### 支持的翻译服务
+
+| 平台 | provider值 | 说明 |
+|------|-----------|------|
+| **讯蒙科技** | `xmor` | Tengri API，支持蒙古语 |
+| LLM翻译 | `llm` | 使用配置的LLM进行翻译 |
+| 百度翻译 | `baidu` | 百度翻译API |
+| 谷歌翻译 | `google` | Google Translate API |
 
 ### 模型客户端抽象层
 
@@ -641,6 +674,9 @@ TAVILY_API_KEY=tvly-xxx
 # TikHub MCP (已配置)
 TIKHUB_API_TOKEN=xxx
 
+# 讯蒙 Tengri 翻译API
+XMOR_API_KEY=sk-xxxxx
+
 # 数据库
 DATABASE_URL=postgresql://user:pass@localhost:5432/pulseglobe
 ```
@@ -652,5 +688,8 @@ DATABASE_URL=postgresql://user:pass@localhost:5432/pulseglobe
 - [x] 确认Agent框架：LangGraph
 - [x] 确认模型兼容层设计
 - [x] 确认运行时翻译方案
+- [x] 确认A2A多Agent架构（见 [a2a_architecture.md](file:///d:/develop/PulseGlobe/docs/a2a_architecture.md)）
+- [x] 确认A2A SDK：官方 `a2a-sdk`
+- [x] 确认翻译服务：讯蒙 Tengri API
 - [ ] 开始编码实现
 

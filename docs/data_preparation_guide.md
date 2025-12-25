@@ -40,15 +40,10 @@ CREATE TABLE pulseglobe_news (
     source_name VARCHAR(100) NOT NULL,
     source_country CHAR(2) NOT NULL,
     category VARCHAR(50),
-    
-    -- 【可选】保留原文
-    title_original TEXT,
-    content_original TEXT,
-    original_language VARCHAR(10),
     url TEXT,
     
     -- 【系统填充】向量字段 - 留空即可
-    embedding vector(1536),
+    embedding vector(2560),
     
     -- 审计字段
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -75,9 +70,6 @@ CREATE INDEX idx_news_category ON pulseglobe_news(category);
 | `source_name` | ✅ | 来源网站 | `"Eagle"` |
 | `source_country` | ✅ | ISO国家代码 | `"MN"` (蒙古国) |
 | `category` | ❌ | 分类标签 | `"体育"` |
-| `title_original` | ❌ | 原语言标题 | `"Гурван настай хүү..."` |
-| `content_original` | ❌ | 原语言正文 | 蒙古语原文 |
-| `original_language` | ❌ | 原语言代码 | `"mn"` |
 | `url` | ❌ | 原文链接 | `"https://eagle.mn/..."` |
 | `embedding` | ❌ | **留空** | PulseGlobe 自动填充 |
 
@@ -142,9 +134,6 @@ WHERE embedding IS NULL;
 
 ### Q: 为什么必须是中文？
 PulseGlobe 使用中文优化的 Embedding 模型，中文数据召回效果最佳。
-
-### Q: 原文字段有什么用？
-可选保留，用于报告中展示原始来源或验证翻译质量。
 
 ### Q: 向量维度 1536 是固定的吗？
 是的，基于 OpenAI `text-embedding-3-small` 模型。如需其他模型，请修改表结构。

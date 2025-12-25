@@ -1,0 +1,18 @@
+# Logs
+*.log
+
+# Environment
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local OpenMCP config
+.openmcp/
