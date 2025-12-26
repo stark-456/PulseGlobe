@@ -1,27 +1,6 @@
 # PulseGlobe
 
-跨境舆情分析 AI 系统
-
-## 项目结构
-
-```
-PulseGlobe/
-├── config/                 # 配置文件
-│   └── models.yaml         # 统一模型配置
-├── docs/                   # 设计文档
-│   ├── a2a_architecture.md # A2A 多 Agent 架构
-│   ├── data_preparation_guide.md # 数据准备指南
-│   └── implementation_plan.md    # 实现计划
-├── pulseglobe/             # 核心代码
-│   └── config.py           # 配置加载器
-├── scripts/                # 工具脚本
-│   ├── translate_mn_news.py  # 蒙语翻译脚本
-│   └── vectorize_news.py     # 向量化脚本
-├── sql/                    # SQL 脚本
-│   ├── migrate_simple.sql    # 数据迁移
-│   └── create_vector_index.sql # 向量索引
-└── MCP/                    # MCP 服务
-```
+跨境舆情分析智能体系统
 
 ## 快速开始
 
@@ -31,13 +10,25 @@ cp .env.example .env
 # 编辑 .env 填入 API Key
 ```
 
-2. 数据翻译（蒙语 → 中文）
+2. 安装依赖
 ```bash
-cd scripts
-uv run translate_mn_news.py --limit 100
+uv sync
 ```
 
-3. 向量化
+3. 测试 Worker Agents
 ```bash
-uv run vectorize_news.py
+uv run python tests/test_workers.py
+```
+
+## 项目结构
+
+```
+pulseglobe/
+├── config/settings.yaml      # 配置文件
+├── core/config.py            # 配置加载器
+├── services/llm.py           # LLM 服务
+└── agents/workers/           # Worker Agents
+    ├── tavily_worker.py      # Tavily 搜索
+    ├── rag_worker.py         # RAG 向量检索
+    └── social_worker.py      # 社交媒体搜索
 ```

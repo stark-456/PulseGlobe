@@ -9,7 +9,7 @@
 # ///
 """
 向量化脚本：为 pulseglobe_news 表生成 embedding
-使用硅基流动 BAAI/bge-large-zh-v1.5 模型（1024 维）
+使用硬基流动 Qwen/Qwen3-Embedding-4B 模型（2560 维）
 
 用法 (使用 uv):
     uv run vectorize_news.py [options]
@@ -44,7 +44,7 @@ load_dotenv()
 # ============================================
 def load_config():
     """加载配置文件"""
-    config_path = Path(__file__).parent.parent / "config" / "models.yaml"
+    config_path = Path(__file__).parent.parent / "config" / "settings.yaml"
     
     if not config_path.exists():
         logging.error(f"配置文件不存在: {config_path}")
@@ -99,8 +99,8 @@ class EmbeddingService:
     """通用 Embedding 服务（OpenAI 兼容接口）"""
     
     def __init__(self, config: dict, concurrency: int = 5):
-        self.model = config.get("model", "BAAI/bge-large-zh-v1.5")
-        self.dimension = config.get("dimension", 1024)
+        self.model = config.get("model", "Qwen/Qwen3-Embedding-4B")
+        self.dimension = config.get("dimensions", 2560)
         self.base_url = config.get("base_url", "https://api.siliconflow.cn/v1")
         self.api_key = config.get("api_key", "")
         

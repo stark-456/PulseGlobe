@@ -55,7 +55,7 @@ SET
 
 -- ========== 迁移全部数据（无日期限制）==========
 -- 取消下面的注释即可迁移全部数据
-/*
+
 INSERT INTO pulseglobe_news (
 doc_id, title, content, publish_date, source_name, 
 source_country, category, url, created_at

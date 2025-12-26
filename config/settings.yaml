@@ -1,0 +1,49 @@
+# PulseGlobe 配置文件
+
+# 数据库配置
+database:
+  host: "${DB_HOST:111.91.20.199}"
+  port: ${DB_PORT:5432}
+  name: "${DB_NAME:news_db}"
+  user: "${DB_USER}"
+  password: "${DB_PASSWORD}"
+  table: "pulseglobe_news"
+
+# LLM配置
+llm:
+  provider: "siliconflow"
+  model: "deepseek-ai/DeepSeek-V3"
+  api_key: "${SILICONFLOW_API_KEY}"
+  base_url: "https://api.siliconflow.cn/v1"
+
+# Embedding配置
+embedding:
+  provider: "siliconflow"
+  model: "Qwen/Qwen3-Embedding-4B"
+  api_key: "${SILICONFLOW_API_KEY}"
+  base_url: "https://api.siliconflow.cn/v1"
+  dimensions: 2560
+
+# Tavily配置
+tavily:
+  api_key: "${TAVILY_API_KEY}"
+
+# MCP配置
+mcp:
+  server_path: "${MCP_SERVER_PATH:d:/develop/PulseGlobe/MCP}"
+
+# TikHub API配置（社交媒体搜索）
+tikhub:
+  api_token: "${TIKHUB_API_TOKEN}"
+  base_url: "${TIKHUB_BASE_URL:https://api.tikhub.io}"
+
+# Agent配置
+agent:
+  max_iterations: 3
+  max_keywords_per_list: 20
+
+# 翻译服务配置
+translation:
+  provider: "${TRANSLATION_PROVIDER:llm}"  # "xmor" 或 "llm"
+  api_key: "${XMOR_API_KEY}"
+  base_url: "https://api.xmor.cn"
